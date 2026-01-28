@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la \"d:\\\\Websites\\\\AGRIFOODSKILLS\\\\slide-library\\\\shared\\\\assets\\\\images\"\" 2>&1 || dir \"d:WebsitesAGRIFOODSKILLSslide-librarysharedassetsimages\"\")"
+    ]
+  }
+}

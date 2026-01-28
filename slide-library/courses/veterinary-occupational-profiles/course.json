@@ -1,0 +1,12 @@
+{
+  "course_id": "veterinary-occupational-profiles",
+  "title": "Veterinary Occupational Profiles",
+  "version": "0.1.0",
+  "language": "en-GB",
+  "source": "Converted from PowerPoint / working draft",
+  "tags": ["occupational-profiles","ESCO","skills-foresight"],
+  "assets": {
+    "images_dir": "assets/images",
+    "video_dir": "assets/video"
+  }
+}

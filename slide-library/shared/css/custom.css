@@ -1,0 +1,250 @@
+/* ============================================================
+   Slide Library Theme (Refactored)
+   - Single source of truth for colours, header/footer, layout
+   - Works in normal view and fullscreen reliably
+   ============================================================ */
+
+:root{
+  /* Colors */
+  --vet-blue: #043F61;
+  --vet-green: #46B749;
+  --vet-yellow: #F7C049;
+
+  /* Layout dimensions */
+  --header-h: 250px;
+  --footer-h: 160px;
+  --content-top-gap: 24px;
+  --content-bottom-gap: 20px;
+
+  /* Image paths are RELATIVE TO this CSS file (shared/css/custom.css) */
+  --header-img-title: url("../../courses/veterinary-occupational-profiles/assets/images/header.png");
+  --header-img-default: url("../../courses/veterinary-occupational-profiles/assets/images/header2.png");
+  --header-img-accent: url("../../courses/veterinary-occupational-profiles/assets/images/header3.png");
+  --footer-img: url("../../courses/veterinary-occupational-profiles/assets/images/footer.png");
+
+  /* Default header selection */
+  --header-img-current: var(--header-img-default);
+}
+
+ 
+/* ------------------------------------------------------------
+   Global: let Reveal use the viewport without hacks
+   (actual scaling/boxing behaviour should be controlled in Reveal.initialize)
+   ------------------------------------------------------------ */
+.reveal { width: 100%; height: 100%; }
+
+/* ------------------------------------------------------------
+   Global header/footer overlays (robust in fullscreen)
+   Requires two empty divs in index.html: #global-header, #global-footer
+   ------------------------------------------------------------ */
+#global-header,
+#global-footer{
+  position: fixed;
+  left: 0;
+  width: 100vw;
+  pointer-events: none;
+  z-index: 9999;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+#global-header, #global-footer{
+  transform: none !important;
+}
+
+
+#global-header{
+  top: 0;
+  height: var(--header-h);
+  background-image: var(--header-img-current);
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: contain;
+  background-color: transparent;
+}
+
+
+
+#global-footer{
+  bottom: 0;
+  height: var(--footer-h);
+  background-image: var(--footer-img);
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: contain;
+  background-color: transparent;
+}
+
+
+/* ------------------------------------------------------------
+   Slide content spacing to avoid header/footer overlap
+   ------------------------------------------------------------ */
+.reveal .slides section{
+  box-sizing: border-box;
+  padding-top: calc(var(--header-h) + var(--content-top-gap));
+  padding-bottom: calc(var(--footer-h) + var(--content-bottom-gap));
+}
+
+/* Override padding when no-header or no-footer is used */
+.reveal .slides section.no-header{
+  padding-top: var(--content-top-gap);
+}
+
+.reveal .slides section.no-footer{
+  padding-bottom: var(--content-bottom-gap);
+}
+
+/* ------------------------------------------------------------
+   Slide theme classes (background + text colour)
+   ------------------------------------------------------------ */
+.slide-blue  { background: var(--vet-blue) !important; }
+.slide-green { background: var(--vet-green) !important; }
+.slide-yellow{ background: var(--vet-yellow) !important; }
+
+.text-white { color: #fff !important; }
+.text-blue  { color: var(--vet-blue) !important; }
+
+/* Ensure headings/paragraph/list inherit white when text-white is applied */
+.reveal .slides section.text-white h1,
+.reveal .slides section.text-white h2,
+.reveal .slides section.text-white h3,
+.reveal .slides section.text-white p,
+.reveal .slides section.text-white li{
+  color: #fff !important;
+}
+
+/* Yellow slides should have black text */
+.reveal .slides section.slide-yellow h1,
+.reveal .slides section.slide-yellow h2,
+.reveal .slides section.slide-yellow h3,
+.reveal .slides section.slide-yellow p,
+.reveal .slides section.slide-yellow li{
+  color: #000 !important;
+}
+
+/* ------------------------------------------------------------
+   In-slide header bar (not the global header image)
+   ------------------------------------------------------------ */
+.header-bar{
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  margin: 0 0 18px 0;
+}
+
+.header-yellow { background: var(--vet-yellow) !important; color: #fff !important; }
+.header-blue   { background: var(--vet-blue) !important; color: #fff !important; }
+.header-green  { background: var(--vet-green) !important; color: #fff !important; }
+
+/* ------------------------------------------------------------
+   Title slide variant
+   ------------------------------------------------------------ */
+.title-slide{
+  background: #ffffff !important;
+  text-align: center;
+}
+
+.title-slide .title-wrap{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 2.5rem;
+}
+
+.title-slide h1{
+  color: var(--vet-green) !important;
+  font-size: 2.1em;
+  font-weight: 600;
+  margin: 0 0 0.6em 0;
+}
+
+.title-slide h2{
+  color: var(--vet-blue) !important;
+  font-size: 1.15em;
+  font-weight: 400;
+  margin: 0;
+}
+
+/* ------------------------------------------------------------
+   Two-column helper (optional, but you were heading here)
+   ------------------------------------------------------------ */
+.twocol{
+  display: flex;
+  gap: 1.6rem;
+  align-items: flex-start;
+}
+
+.col{ flex: 1; min-width: 0; }
+.col-left{ flex: 1.15; }
+.col-right{ flex: 0.85; }
+
+.block{
+  padding: 0.8rem 0.95rem;
+  border: 1px solid rgba(0,0,0,0.18);
+  border-radius: 10px;
+  background: rgba(0,0,0,0.02);
+  margin-bottom: 0.8rem;
+}
+
+.small{ font-size: 0.82em; }
+.xsmall{ font-size: 0.72em; }
+
+/* ------------------------------------------------------------
+   Compact mode for content-heavy slides
+   Apply .compact class to slides that need smaller text
+   ------------------------------------------------------------ */
+.reveal .slides section.compact h2 {
+  font-size: 1.6em;
+  margin-bottom: 0.6em;
+}
+
+.reveal .slides section.compact h3 {
+  font-size: 1.2em;
+  margin-bottom: 0.4em;
+  margin-top: 0.6em;
+}
+
+.reveal .slides section.compact p {
+  font-size: 0.8em;
+  line-height: 1.35;
+  margin-bottom: 0.5em;
+}
+
+.reveal .slides section.compact ul,
+.reveal .slides section.compact ol {
+  font-size: 0.8em;
+  line-height: 1.3;
+  margin-bottom: 0.5em;
+}
+
+.reveal .slides section.compact li {
+  margin-bottom: 0.25em;
+}
+
+/* Two-column layouts automatically get compact styling */
+.twocol h3 {
+  font-size: 1.1em !important;
+  margin-bottom: 0.4em !important;
+}
+
+.twocol p,
+.twocol li {
+  font-size: 0.75em !important;
+  line-height: 1.3 !important;
+}
+
+/* Tables automatically get compact styling */
+.reveal .slides section table {
+  font-size: 0.7em;
+  line-height: 1.2;
+}
+
+.reveal .slides section table th {
+  font-weight: 600;
+  padding: 0.4em;
+}
+
+.reveal .slides section table td {
+  padding: 0.35em;
+}
